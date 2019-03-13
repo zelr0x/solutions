@@ -1,7 +1,7 @@
 import base64
 
 
-def hex2b64(s, encoding='utf-8'):
+def hex2b64(s: str, encoding: str='utf-8') -> str:
     return base64.b64encode(bytearray.fromhex(s)).decode(encoding)
 
 
