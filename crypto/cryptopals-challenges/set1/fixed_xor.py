@@ -1,4 +1,4 @@
-def fixed_xor(a, b):
+def fixed_xor(a: str, b: str) -> str:
     return (bytearray(ba ^ bb for (ba, bb)
                       in zip(bytearray.fromhex(a), bytearray.fromhex(b)))
             ).hex()
