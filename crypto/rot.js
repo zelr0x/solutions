@@ -1,5 +1,7 @@
-// 
-const rot = (str, shift=13, aStart='A', aSize=26) => {
+// Encrypt str with ROT (Caesar) cipher. 
+// Cpecify shift, first letter of the alphabet and its length.
+// Characters not in the alphabet range are untouched.
+const rotDecrypt = (str, shift=13, aStart='A', aSize=26) => {
   const res = [];
   aStart = aStart.charCodeAt(0);
   const aEnd = aStart + aSize - 1;
@@ -12,5 +14,5 @@ const rot = (str, shift=13, aStart='A', aSize=26) => {
   return res.join('');
 }
 
-console.log(rot('LBH QVQ VG!')); // YOU DID IT!
-console.log(rot('lbh qvq vg!', 13, 'a')); // you did it!
+console.log(rotDecrypt('LBH QVQ VG!')); // YOU DID IT!
+console.log(rotDecrypt('lbh qvq vg!', 13, 'a')); // you did it!
