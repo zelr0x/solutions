@@ -1,4 +1,4 @@
-# Count substring sub in string s.
+# Count substring sub in string s. Case-sensitive by design.
 def count_substring(s: str, sub: str) -> int:
     le = len(s)
     suble = len(sub)
