@@ -10,13 +10,13 @@ int main() {
         perror("Unable to allocate buffer");
         return 1;
     }
-    size_t read_size = getline(&s, &size, stdin);
-    if (read_size < 1) {
+    size_t len = getline(&s, &size, stdin);
+    if (len < 1) {
         perror("Wrong input");
         return 1;
     }
 
-    for (size_t i = 0; i < read_size; i++) {
+    for (size_t i = 0; i < len; i++) {
         char c = s[i];
         printf("%c", (c != ' ' && c != '\t') ? c : '\n');
     }
