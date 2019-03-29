@@ -1,7 +1,7 @@
 // Simple implementation of homogeneous (single-typed) immutable pair.
 // Can be useful in pre java 9 environments where AbstractMap is disallowed 
 // e.g. exercises with limited imports.
-class Pair<T> {
+public class Pair<T> {
     private final T first;
     private final T second;
     Pair(final T first, final T second) {
