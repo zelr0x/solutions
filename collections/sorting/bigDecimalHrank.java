@@ -1,5 +1,6 @@
 // Given an array s of n strings containing big decimals, sort them in descending order.
 // A code can only be written within "unlocked" section.
+// https://www.hackerrank.com/challenges/java-bigdecimal/problem
 
 import java.math.BigDecimal;
 import java.util.*;
