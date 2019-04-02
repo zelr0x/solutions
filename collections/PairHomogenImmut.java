@@ -16,13 +16,7 @@ public class Pair<T> {
     }
     @Override
     public int hashCode() {
-        int prime = 31;
-        int result = 1;
-        result = prime * result + 
-            ((this.first == null) ? 0 : this.first.hashCode());
-        result = prime * result + 
-            ((this.second == null) ? 0 : this.second.hashCode());
-        return result;
+        return Objects.hash(first, second);
     }
     @Override
     public boolean equals(final Object other) {
