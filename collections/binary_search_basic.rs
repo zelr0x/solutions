@@ -24,13 +24,13 @@ fn main() {
     }
 
     println!("V: {:?}", v);
-    match b_search(target, v) {
+    match b_search(target, &v) {
         None => println!("There is no \"{}\" in V", target),
-        Some(res) => println!("Index of {} is {}", target, res),
+        Some(res) => println!("First index of {} is {}", target, res),
     }
 }
 
-fn b_search(key: i32, v: Vec<i32>) -> Option<i32> {
+fn b_search(key: i32, v: &Vec<i32>) -> Option<i32> {
     let mut lo = 0;
     let mut hi = (v.len() as i32) - 1;
     while lo <= hi {
