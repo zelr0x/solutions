@@ -6,7 +6,7 @@
  * g h i
  * diff = abs((a + e + i) - (c + e + g))
  */
-int diagonalDifference(vector<vector<int>> arr) {
+long long diagonal_diff(const vector<vector<int>>& arr) {
     const auto size = arr.size();
     auto diff{0};
     for (auto i = 0; i < size; i++) {
