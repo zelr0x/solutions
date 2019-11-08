@@ -1,5 +1,5 @@
--- Iterative
-factorial x = product [x, x-1 .. 1]
-
 -- Recursive
-fact x = if x < 2 then x else x * (fact . pred) x
+factorial n = if n < 2 then n else n * (fact . pred) n
+
+-- Iterative
+factorial n = product [1 .. n]
