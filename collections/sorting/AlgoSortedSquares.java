@@ -1,3 +1,6 @@
+/**
+ * https://leetcode.com/problems/squares-of-a-sorted-array/
+ */
 class AlgoSortedSquares {
     public int[] sortedSquares(final int[] a) {
         final int len = a.length;
