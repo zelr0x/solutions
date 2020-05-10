@@ -21,8 +21,7 @@ public class AlgoBubbleSort {
         }
     }
 
-    private static <T extends Comparable<? super T>> void sort(final Object[] arr,
-                                                               final Comparator cmp) {
+    private static void sort(final Object[] arr, final Comparator cmp) {
         final int len = arr.length;
         if (len < 2) return;
 
