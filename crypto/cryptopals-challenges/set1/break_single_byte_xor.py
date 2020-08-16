@@ -1,10 +1,9 @@
 from typing import Dict, Any, Union
 
 
-def crack_1b_xor(s: str) -> str:
+def break_single_byte_xor(s: bytes) -> str:
     def xor(byte: int) -> str:
-        return ''.join(chr(x) for x in bytearray(s_byte ^ byte for s_byte
-                                                 in bytearray.fromhex(s)))
+        return ''.join(chr(x) for x in bytearray(s_byte ^ byte for s_byte in s))
 
     eng_freq: Dict[Union[str, Any], Union[Union[int, float], Any]] = {
         ' ': 15, 'a': 8.167, 'b': 1.492, 'c': 2.782, 'd': 4.253,
@@ -26,4 +25,6 @@ def crack_1b_xor(s: str) -> str:
 
 if __name__ == '__main__':
     t = '1b37373331363f78151b7f2b783431333d78397828372d363c78373e783a393b3736'
-    print(crack_1b_xor(t))
+    r = break_single_byte_xor(bytearray.fromhex(t))
+    print(r)
+    assert r == "Cooking MC's like a pound of bacon"
