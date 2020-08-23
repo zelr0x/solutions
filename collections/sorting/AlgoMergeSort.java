@@ -29,9 +29,15 @@ class AlgoMergeSort {
                 i++;
             }
         }
-
-        final int remainingIdx = i == aLen ? j : i;
-        final List<T> remaining = i == aLen ? b : a;
+        final int remainingIdx;
+        final List<T> remaining;
+        if (i == aLen) {
+            remainingIdx = j;
+            remaining = b;
+        } else {
+            remainingIdx = i;
+            remaining = a;
+        }
         res.addAll(remaining.subList(remainingIdx, remaining.size()));
         return res;
     }
@@ -62,9 +68,8 @@ class AlgoMergeSort {
         assert a.equals(List.<Integer>of());
     }
 
+    /** @noinspection ConstantConditions*/
     public static void sortNull_ReturnsNull() {
-        var a = sort(null);
-        System.out.println(a);
-        assert a == null;
+        assert sort(null) == null;
     }
 }
