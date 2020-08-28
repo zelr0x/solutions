@@ -6,6 +6,8 @@ import java.util.function.Supplier;
 
 /**
  * A container object which always contains a value or an error.
+ *
+ * @author zelr0x.
  */
 public abstract class Result<T, E> {
 
@@ -53,6 +55,11 @@ public abstract class Result<T, E> {
 		return isOk() ? ok(get()) : other.get();
 	}
 
+	public <X extends Throwable> T onErrThrow(Supplier<? extends X> exceptionSupplier) throws X {
+		if (isOk()) return getValue();
+		throw exceptionSupplier.get();
+	}
+
 	public static final class Ok<T, E> extends Result<T, E> {
 		private final T value;
 
@@ -84,6 +91,20 @@ public abstract class Result<T, E> {
 		@Override
 		public String toString() {
 			return "Ok(" + value + ")";
+		}
+
+		@Override
+		public int hashCode() {
+			return Objects.hashCode(value);
+		}
+
+		@Override
+		public boolean equals(Object obj) {
+			if (this == obj) return true;
+			if (!(obj instanceof Result)) return false;
+			Result<?, ?> other = (Result<?, ?>) obj;
+			if (other.isErr()) return false;
+			return Objects.equals(value, other.getValue());
 		}
 
 		@Override
@@ -122,6 +143,20 @@ public abstract class Result<T, E> {
 		@Override
 		public String toString() {
 			return "Err(" + error + ")";
+		}
+
+		@Override
+		public int hashCode() {
+			return Objects.hashCode(error);
+		}
+
+		@Override
+		public boolean equals(Object obj) {
+			if (this == obj) return true;
+			if (!(obj instanceof Result)) return false;
+			Result<?, ?> other = (Result<?, ?>) obj;
+			if (other.isOk()) return false;
+			return Objects.equals(error, other.getErr());
 		}
 
 		@Override
