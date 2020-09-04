@@ -3,6 +3,11 @@ import java.util.stream.Collectors;
 
 import static java.util.stream.Collectors.toSet;
 
+/**
+ * Merges n sorted lists into a one sorted list.
+ * 
+ * @author zelr0x
+ */
 class AlgoMergeLists {
     public static void main(String[] args) {
         var a = List.of(1, 2, 3, 4, 5);
@@ -15,9 +20,9 @@ class AlgoMergeLists {
     public static <T extends Comparable<? super T>>
     List<T> merge(List<List<? extends T>> lists) {
         lists = prepareLists(lists);
-        final int n = lists.size();
-        if (n == 0 || lists.get(0) == null) return Collections.emptyList();
+        if (lists.isEmpty()) return Collections.emptyList();
 
+        final int n = lists.size();
         Set<? extends Iterator<? extends T>> iterators = lists.stream()
                 .map(List::iterator)
                 .collect(toSet());
@@ -49,7 +54,11 @@ class AlgoMergeLists {
     private static <T extends Comparable<? super T>>
     List<List<? extends T>> prepareLists(List<List<? extends T>> list) {
         return (list == null) ? Collections.emptyList() : list.stream()
-                .filter(Objects::nonNull)
+                .filter(AlgoMergeLists::isNotEmpty)
                 .collect(Collectors.toList());
+    }
+
+    private static boolean isNotEmpty(Collection<?> coll) {
+        return coll != null && !coll.isEmpty();
     }
 }
