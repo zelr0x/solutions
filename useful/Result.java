@@ -30,10 +30,13 @@ public abstract class Result<T, E> {
 	public abstract boolean isErr();
 
 	protected abstract T getValue();
-	
+
+	public Optional<T> getOptional() {
+		return Optional.ofNullable(getValue());
+	}
+
 	public<U> Optional<U> mapOptional(final Function<T, U> mapper) {
-		Result<U, ?> res = map(mapper);
-		return res.isOk() ? Optional.of(res.get()) : Optional.empty();
+		return getOptional().map(mapper);
 	}
 
 	public<U> Result<U, E> map(final Function<T, U> mapper) {
@@ -55,13 +58,13 @@ public abstract class Result<T, E> {
 				return ret;
 			});
 	}
-	
+
 	public T orElse(final T other) {
-		return isOk() ? get() : other;
+		return isOk() ? getValue() : other;
 	}
 
 	public T orElseGet(final Supplier<? extends T> other) {
-		return isOk() ? get() : other.get();
+		return isOk() ? getValue() : other.get();
 	}
 
 	public <X extends Throwable> T onErrThrow(Supplier<? extends X> exceptionSupplier) throws X {
