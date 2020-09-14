@@ -50,9 +50,13 @@ public abstract class Result<T, E> {
 				return ret;
 			});
 	}
+	
+	public T orElse(final T other) {
+		return isOk() ? get() : other;
+	}
 
-	public Result<T, E> orElseGet(final Supplier<? extends Result<T, E>> other) {
-		return isOk() ? ok(get()) : other.get();
+	public T orElseGet(final Supplier<? extends T> other) {
+		return isOk() ? get() : other.get();
 	}
 
 	public <X extends Throwable> T onErrThrow(Supplier<? extends X> exceptionSupplier) throws X {
