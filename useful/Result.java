@@ -30,6 +30,11 @@ public abstract class Result<T, E> {
 	public abstract boolean isErr();
 
 	protected abstract T getValue();
+	
+	public<U> Optional<U> mapOptional(final Function<T, U> mapper) {
+		Result<U, ?> res = map(mapper);
+		return res.isOk() ? Optional.of(res.get()) : Optional.empty();
+	}
 
 	public<U> Result<U, E> map(final Function<T, U> mapper) {
 		return Optional.ofNullable(getValue())
