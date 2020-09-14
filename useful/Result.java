@@ -58,6 +58,20 @@ public abstract class Result<T, E> {
 				return ret;
 			});
 	}
+	
+	public<U> Result<U, E> flatMap(Function<? super T, Result<U, E>> mapper) {
+		Objects.requireNonNull(mapper);
+		return isErr() 
+				? err(getErr()) 
+				: Objects.requireNonNull(mapper.apply(getValue()));
+	}
+
+	public<U> Result<T, U> flatMapErr(Function<? super E, Result<T, U>> mapper) {
+		Objects.requireNonNull(mapper);
+		return isOk()
+				? ok(getValue())
+				: Objects.requireNonNull(mapper.apply(getErr()));
+	}
 
 	public T orElse(final T other) {
 		return isOk() ? getValue() : other;
