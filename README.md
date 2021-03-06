@@ -1,2 +1,2 @@
 # solutions
-Solutions to various exercises. Nothing that violates any honor code, ToS or NDA. Only my code
+My solutions to various exercises, algorithms for which I haven't found a better place, etc.
