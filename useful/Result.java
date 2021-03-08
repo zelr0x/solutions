@@ -31,6 +31,14 @@ public abstract class Result<T, E> {
 
 	protected abstract T getValue();
 
+	public Optional<T> getOptional() {
+		return Optional.ofNullable(getValue());
+	}
+
+	public<U> Optional<U> mapOptional(final Function<T, U> mapper) {
+		return getOptional().map(mapper);
+	}
+
 	public<U> Result<U, E> map(final Function<T, U> mapper) {
 		return Optional.ofNullable(getValue())
 			.map(v -> Result.<U, E> ok(mapper.apply(v)))
@@ -50,9 +58,27 @@ public abstract class Result<T, E> {
 				return ret;
 			});
 	}
+	
+	public<U> Result<U, E> flatMap(Function<? super T, Result<U, E>> mapper) {
+		Objects.requireNonNull(mapper);
+		return isErr() 
+				? err(getErr()) 
+				: Objects.requireNonNull(mapper.apply(getValue()));
+	}
 
-	public Result<T, E> orElseGet(final Supplier<? extends Result<T, E>> other) {
-		return isOk() ? ok(get()) : other.get();
+	public<U> Result<T, U> flatMapErr(Function<? super E, Result<T, U>> mapper) {
+		Objects.requireNonNull(mapper);
+		return isOk()
+				? ok(getValue())
+				: Objects.requireNonNull(mapper.apply(getErr()));
+	}
+
+	public T orElse(final T other) {
+		return isOk() ? getValue() : other;
+	}
+
+	public T orElseGet(final Supplier<? extends T> other) {
+		return isOk() ? getValue() : other.get();
 	}
 
 	public <X extends Throwable> T onErrThrow(Supplier<? extends X> exceptionSupplier) throws X {
