@@ -5,6 +5,7 @@ import (
 	"strings"
 )
 
+// https://tour.golang.org/moretypes/23
 func WordCount(s string) map[string]int {
 	sWords := words(s)
 	res := make(map[string]int, len(sWords))
