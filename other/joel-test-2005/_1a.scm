@@ -7,6 +7,6 @@
                              (cdr arr)))))
 
 (define (sum-of-squares arr)
-    (accumulate(lambda (x y) (+ (* x x) y)) 0 arr))
+    (accumulate (lambda (x y) (+ (* x x) y)) 0 arr))
 
 (sum-of-squares '(1 2 3 4 5))
