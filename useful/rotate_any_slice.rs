@@ -15,7 +15,7 @@ pub fn lrot<T>(a: &mut [T], k: usize) {
     }
 }
 
-pub fn rrot<T: std::fmt::Debug>(a: &mut [T], k: usize) {
+pub fn rrot<T>(a: &mut [T], k: usize) {
     let n = a.len();
     let k = k % n;
     if k == 0 {
