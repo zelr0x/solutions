@@ -1,7 +1,7 @@
 import java.util.Map;
 import java.util.HashMap;
 
-class Solution {
+class ValidAnagramByCodePoints {
     public boolean isAnagram(final String s, final String t) {
         if (s == t) return true;
         if (s == null || t == null) return false;
