@@ -5,7 +5,7 @@ const binSearchCutoff = 16
 func BinSearchInt(a []int, target int) int {
 	lo := 0
 	hi := len(a)
-	for lo < hi {
+	for {
 		n := hi - lo
 		if n <= binSearchCutoff {
 			for i, v := range a[lo:hi] {
@@ -16,15 +16,14 @@ func BinSearchInt(a []int, target int) int {
 			return -1
 		}
 		mid := lo + n/2
-		aMid := a[mid]
-		if aMid == target {
+		v := a[mid]
+		switch {
+		case v < target:
+			lo = mid + 1
+		case v > target:
+			hi = mid
+		default:
 			return mid
 		}
-		if aMid < target {
-			lo = mid + 1
-		} else if aMid > target {
-			hi = mid
-		}
 	}
-	return -1
 }
